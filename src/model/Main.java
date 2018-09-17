@@ -18,7 +18,7 @@ public class Main {
         // TODO code application logic here
         Pasien pasien1 = new Pasien("Ravael");
         Dokter dokter1 = new Dokter("Fani");
-        AntriPasien antri = new AntriPasien();
+        AntrianPasien antri = new AntrianPasien();
 
         try {
             pasien1.setAlamat("Yogyakarta");
@@ -60,4 +60,3 @@ public class Main {
         System.out.println("");
     }
 }
-
