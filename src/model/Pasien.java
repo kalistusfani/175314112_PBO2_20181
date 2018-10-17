@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +54,6 @@ public class Pasien {
      *
      * @param nama
      */
-
     public Pasien(String nama) {
         this.nama = nama;
     }
@@ -63,6 +66,10 @@ public class Pasien {
      */
     public String getNama() {
         return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     /**
@@ -128,7 +135,7 @@ public class Pasien {
      * @param RekamMedis
      * @throws Exception
      */
-    public void setRekamMedis(String RekamMedis) throws Exception {
+    public void setNoRekamMedis(String RekamMedis) throws Exception {
         //panjang rekam medis yang harus dimasukan lebih dari 6
         if (this.noRekamMedis.length() > 6) {
             this.noRekamMedis = RekamMedis;
@@ -286,15 +293,29 @@ public class Pasien {
         return result;
     }
 
-    public void setNama(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void simpanDaftarPasien(File file) throws IOException {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            for (int i = 0; i < daftarPasienKlinik.size(); i++) {
+                String data = daftarPasienKlinik.get(i).toString();
+                fos.write(data.getBytes());
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
-    public void setNoRM(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getNoRM() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public String toString() {
+        return "Nama : " + nama + ", Alamat : " + alamat;
     }
 }
